@@ -14,8 +14,12 @@ function App()
   const[buttonText, setButtonText] = useState("")
   const [ bodyItems, setBodyItems] = useState(items)
   
+   const value = useMemo(() => ({
+    arrayLength, setArrayLength, buttonText, setButtonText, bodyItems, setBodyItems
+  }), [arrayLength,buttonText,bodyItems])
+  
   return (
-    <ArrayLengthContext.Provider value={{ arrayLength, setArrayLength, buttonText, setButtonText, bodyItems, setBodyItems }}>
+    <ArrayLengthContext.Provider value={value}>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={
