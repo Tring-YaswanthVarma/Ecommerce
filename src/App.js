@@ -1,25 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './components/Header';
+import Body from './components/Body'
+import cartItems from './components/cartArray';
+import React, { useState, createContext } from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Cart from './components/Cart';
+import items from './components/Data';
 
-function App() {
+const ArrayLengthContext = createContext();
+function App()
+{
+  const len = cartItems.length
+  const [arrayLength, setArrayLength] = useState(len)
+  const[buttonText, setButtonText] = useState("")
+  const [ bodyItems, setBodyItems] = useState(items)
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ArrayLengthContext.Provider value={{ arrayLength, setArrayLength, buttonText, setButtonText, bodyItems, setBodyItems }}>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={
+            <>
+              <Header items={arrayLength} />
+              <Body />
+            </>
+          } />
+          <Route path='/cart' element={<Cart />}/>
+        </Routes>
+      </BrowserRouter>
+    </ArrayLengthContext.Provider>
   );
 }
 
 export default App;
+export { ArrayLengthContext };
