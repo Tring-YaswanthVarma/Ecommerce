@@ -1,7 +1,7 @@
 import Header from './components/Header';
 import Body from './components/Body'
 import cartItems from './components/cartArray';
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext,useMemo } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Cart from './components/Cart';
 import items from './components/Data';
